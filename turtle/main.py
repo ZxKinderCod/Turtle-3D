@@ -1,44 +1,39 @@
-import turtle
+import turtle as t
 
-# Membuat objek turtle
-t = turtle.Turtle()
+# Setup dasar
+t.speed(2)  # speed 1-10, makin besar makin cepat
+t.bgcolor("white")
 
-# Menggambar kubus (representasi 2D)
-# Persegi depan
-for _ in range(4):
-    t.forward(100)  # Maju 100 piksel
-    t.right(90)     # Belok kanan 90 derajat
+# Fungsi untuk pindah tanpa gambar garis
+def pindah(x, y):
+    t.penup()      # angkat pena
+    t.goto(x, y)   # pindah ke koordinat
+    t.pendown()    # turunkan pena
 
-# Pindah ke posisi untuk persegi belakang
-t.penup()
-t.goto(100, 50)  # Geser ke kanan atas untuk proyeksi isometrik kubus
-t.pendown()
+# Contoh 1: Buat segitiga (gunung)
+pindah(-200, 0)
+t.goto(0, 150)     # ke puncak
+t.goto(200, 0)     # ke kanan bawah
+t.goto(-200, 0)    # balik ke awal
 
-# Persegi belakang
-for _ in range(4):
-    t.forward(100)  # Maju 100 piksel
-    t.right(90)     # Belok kanan 90 derajat
+# Contoh 2: Garis horizontal (rumput)
+pindah(-300, 0)
+t.goto(300, 0)
 
-# Hubungkan sudut-sudut untuk efek 3D
-t.penup()
-t.goto(0, 0)
-t.pendown()
-t.goto(80, 40)  # Diagonal kiri bawah (dipendekkan)
+# Contoh 3: Trapesium (jalan)
+pindah(-50, 0)
+t.goto(-20, -200)  # kiri bawah
+t.goto(20, -200)   # kanan bawah
+t.goto(50, 0)      # kanan atas
 
-t.penup()
-t.goto(100, 0)
-t.pendown()
-t.goto(180, 40)  # Diagonal kanan bawah (dipendekkan)
+# Contoh 4: Garis putus-putus (marka jalan)
+pindah(0, -10)
+t.setheading(-90)  # arah ke bawah (0=kanan, 90=atas, 180=kiri, 270=bawah)
+for i in range(5):
+    t.forward(20)   # gambar garis
+    t.penup()
+    t.forward(15)   # loncat tanpa gambar
+    t.pendown()
 
-t.penup()
-t.goto(0, 100)
-t.pendown()
-t.goto(100, 150)  # Diagonal kiri atas
-
-t.penup()
-t.goto(100, 100)
-t.pendown()
-t.goto(200, 150)  # Diagonal kanan atas
-
-# Menutup jendela saat diklik
-turtle.done()
+t.hideturtle()
+t.done()
